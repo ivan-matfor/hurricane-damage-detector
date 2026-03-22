@@ -7,6 +7,8 @@ Provides functions to:
     - Plot training history across both training phases
 """
 
+from pathlib import Path
+
 import numpy as np
 import matplotlib.pyplot as plt
 from sklearn.metrics import (
@@ -73,7 +75,7 @@ def evaluate_model(model: tf.keras.Model) -> dict:
 def plot_training_history(
     history_phase1: tf.keras.callbacks.History,
     history_phase2: tf.keras.callbacks.History,
-    save_path: str | None = None,
+    save_path: str | Path | None = None,
 ) -> None:
     """
     Plot training and validation loss/accuracy across both phases.
@@ -162,7 +164,7 @@ def _predict_on_test(model: tf.keras.Model) -> tuple[np.ndarray, np.ndarray]:
 
 
 def _plot_confusion_matrix(
-    cm: np.ndarray, save_path: str | None = None
+    cm: np.ndarray, save_path: str | Path | None = None
 ) -> None:
     """Plot and optionally save a confusion matrix figure."""
     fig, ax = plt.subplots(figsize=(8, 6))

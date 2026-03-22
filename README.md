@@ -6,15 +6,18 @@ for model interpretability.
 
 ## Results
 
-> **Note:** Results will be updated after training. Values below are placeholders.
+Evaluated on the test set (9,000 images, unbalanced: 8,000 damage / 1,000 no_damage).
 
-| Metric    | No Damage | Damage | Overall |
-|-----------|-----------|--------|---------|
-| Precision | —         | —      | —       |
-| Recall    | —         | —      | —       |
-| F1-Score  | —         | —      | —       |
+| Metric    | No Damage | Damage | Overall (weighted avg) |
+|-----------|-----------|--------|------------------------|
+| Precision | 0.81      | 1.00   | 0.98                   |
+| Recall    | 0.98      | 0.97   | 0.97                   |
+| F1-Score  | 0.89      | 0.98   | 0.97                   |
+| Accuracy  | —         | —      | 0.97                   |
 
-<!-- TODO: Insert training_history.png, confusion_matrix.png, gradcam.png -->
+![Training History](results/training_history.png)
+![Confusion Matrix](results/confusion_matrix.png)
+![Grad-CAM Samples](results/gradcam_samples.png)
 
 ## Approach
 
@@ -68,6 +71,8 @@ hurricane-damage-detector/
 │   └── gradcam.py             # Grad-CAM visualizations + error analysis
 ├── notebooks/
 │   └── exploration.ipynb      # EDA, sample images, augmentation demos
+├── saved_model/               # Auto-generated during training
+│   └── hurricane_detector.keras
 ├── results/                   # Auto-generated during training
 │   ├── training_history.png
 │   ├── confusion_matrix.png
@@ -103,7 +108,8 @@ python -m src.train
 ```
 
 This downloads the dataset (if needed), runs both training phases,
-saves the model to `saved_model/`, and generates training plots in `results/`.
+saves the model to `saved_model/`, and generates all plots and metrics in `results/`
+(training history, confusion matrix, classification report).
 
 ### Evaluate
 
@@ -141,7 +147,7 @@ visualize_errors_with_gradcam(model, save_path="results/gradcam_errors.png")
   - Train: 10,000 images (5,000 per class)
   - Validation: 2,000 images (1,000 per class)
   - Test: 9,000 images (unbalanced)
-* **Classes:** `damage`, `no_damage`
+* **Classes:** `no_damage` (index 0), `damage` (index 1)
 * **Citation:** Cao, Q.D. & Choe, Y. (2018). DOI: [10.21227/sdad-1e56](https://dx.doi.org/10.21227/sdad-1e56)
 
 ## Key Decisions & Tradeoffs

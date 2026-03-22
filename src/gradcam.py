@@ -13,6 +13,8 @@ Reference:
     https://arxiv.org/abs/1610.02391
 """
 
+from pathlib import Path
+
 import numpy as np
 import matplotlib.pyplot as plt
 import tensorflow as tf
@@ -147,15 +149,15 @@ def overlay_heatmap(
 def visualize_gradcam(
     model: tf.keras.Model,
     num_samples: int = GRADCAM_NUM_SAMPLES,
-    save_path: str | None = None,
+    save_path: str | Path | None = None,
 ) -> None:
     """
     Generate Grad-CAM visualizations for sample test images.
 
-    Creates a grid showing:
-        - Original image
-        - Grad-CAM heatmap overlay
-        - True label vs predicted label
+    Creates a grid showing (3 columns per row):
+        - Original image with true label
+        - Grad-CAM heatmap
+        - Heatmap overlay with predicted label
 
     Args:
         model: Trained Keras model.
@@ -233,7 +235,7 @@ def visualize_gradcam(
 def visualize_errors_with_gradcam(
     model: tf.keras.Model,
     max_errors: int = 8,
-    save_path: str | None = None,
+    save_path: str | Path | None = None,
 ) -> None:
     """
     Visualize Grad-CAM specifically on misclassified images.
@@ -316,8 +318,6 @@ def visualize_errors_with_gradcam(
 
 
 if __name__ == "__main__":
-    from config import RESULTS_DIR
-
     model = tf.keras.models.load_model("saved_model/hurricane_detector.keras")
     visualize_gradcam(model, save_path=RESULTS_DIR / "gradcam_samples.png")
     visualize_errors_with_gradcam(model, save_path=RESULTS_DIR / "gradcam_errors.png")
