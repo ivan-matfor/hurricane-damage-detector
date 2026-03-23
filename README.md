@@ -94,12 +94,14 @@ pip install -r requirements.txt
 
 ### Kaggle API Setup
 
-The dataset is downloaded automatically from Kaggle. You need a Kaggle
-API token:
-
-1. Go to [kaggle.com/settings](https://www.kaggle.com/settings) → API → Create New Token
-2. Place the downloaded `kaggle.json` in `~/.kaggle/`
-3. Set permissions: `chmod 600 ~/.kaggle/kaggle.json`
+**Option A — API Token (Recommended)**
+1. Go to [kaggle.com/settings](https://kaggle.com/settings) → API Tokens → **Generate New Token**
+2. Copy the `export` command shown in the dialog
+3. Paste it in your terminal:
+```bash
+   export KAGGLE_API_TOKEN=
+```
+4. To make it persistent, add the line to your shell profile (`~/.zshrc` or `~/.bashrc`)
 
 ### Train
 
