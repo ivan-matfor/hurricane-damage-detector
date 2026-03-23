@@ -94,7 +94,7 @@ pip install -r requirements.txt
 
 ### Kaggle API Setup
 
-**Option A — API Token (Recommended)**
+**API Token (Recommended)**
 1. Go to [kaggle.com/settings](https://kaggle.com/settings) → API Tokens → **Generate New Token**
 2. Copy the `export` command shown in the dialog
 3. Paste it in your terminal:
